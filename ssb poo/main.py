@@ -1,14 +1,17 @@
 import sys
+
+import pygame
+
 from player import *
 from enemy import *
 from block import *
-from screwdriver import *
 from room import Room
 from spriteSheet import *
 from ground import *
 from button import *
 from attack import *
 from door import *
+from screwdriver import Screwdriver
 
 
 class Game:  # main game class
@@ -44,8 +47,9 @@ class Game:  # main game class
                     Screwdriver(self, j, i)
                 if collumn == 'D':
                     Door(self, j, i)
-        self.player = Player(self,16,5)  # create the player sprite at the position 16, 5
-        #cam dans player(mouvement) ligne de for a modifier on sait jamais
+        self.player = Player(self, 16, 5)  # create the player sprite at the position 16, 5
+        # cam dans player(mouvement) ligne de for a modifier on sait jamais
+
     def new(self):
         # a new game starts
         self.playing = True  # set the playing variable
@@ -67,16 +71,20 @@ class Game:  # main game class
             if event.type == pygame.KEYDOWN:  # if the event is KEYDOWN (a key is pressed)
                 if event.key == pygame.K_SPACE:  # if the key is SPACE (space bar)
                     if self.player.facing == 'up':  # if the player is facing up
-                        Attack(self, self.player.rect.x,self.player.rect.y - TILESIZE)  # create an attack sprite at the position of the player
+                        Attack(self, self.player.rect.x,
+                               self.player.rect.y - TILESIZE)  # create an attack sprite at the position of the player
 
                     if self.player.facing == 'down':  # if the player is facing down
-                        Attack(self, self.player.rect.x,self.player.rect.y + TILESIZE)  # create an attack sprite at the position of the player
+                        Attack(self, self.player.rect.x,
+                               self.player.rect.y + TILESIZE)  # create an attack sprite at the position of the player
 
                     if self.player.facing == 'left':  # if the player is facing left
-                        Attack(self, self.player.rect.x - TILESIZE,self.player.rect.y)  # create an attack sprite at the position of the player
+                        Attack(self, self.player.rect.x - TILESIZE,
+                               self.player.rect.y)  # create an attack sprite at the position of the player
 
                     if self.player.facing == 'right':  # if the player is facing right
-                        Attack(self, self.player.rect.x + TILESIZE,self.player.rect.y)  # create an attack sprite at the position of the player
+                        Attack(self, self.player.rect.x + TILESIZE,
+                               self.player.rect.y)  # create an attack sprite at the position of the player
 
     def update(self):  # update the game
         self.all_sprites.update()  # update the all_sprites group
@@ -87,13 +95,20 @@ class Game:  # main game class
         self.clock.tick(FPS)  # set the clock to 60 fps
         pygame.display.update()  # update the display
 
-    def main(self):  # main game loop
+    def main(self):
+        time = 1 # main game loop
         while self.playing:  # while the game is playing
+            timer = (pygame.time.get_ticks() //1000)
+            if timer > time:
+                time = time + 1
+                print(time)
+            if time %21 == 0:
+                self.playing = False
+                time = 1
+
             self.events()  # check for events
             self.update()  # update the game
             self.draw()  # draw the game
-            print(pygame.time.get_ticks()//1000)
-
 
     def game_over(self):  # game over screen
         text = self.font.render(' ', True, WHITE)  # set the text

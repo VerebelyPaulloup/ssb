@@ -46,17 +46,3 @@ class Inventory:
                 pass
             else:
                 pass
-
-
-    def affichage(self, screen):
-        k = pygame.key.get_pressed()
-        if k[pygame.K_i]:
-            screen.blit(self.image, self.rect)
-            if self.liste[0]:
-                screen.blit(pygame.transform.scale(pygame.image.load("image/Marteau.png"), (50, 50)), (100, 0))
-            if self.liste[1]:
-                screen.blit(pygame.transform.scale(pygame.image.load("image/Scie.png"), (50, 50)), (200, 0))
-            if self.liste[2]:
-                screen.blit(pygame.transform.scale(pygame.image.load("image/Tournevis.png"), (50, 50)), (300, 0))
-        else:
-            pass
