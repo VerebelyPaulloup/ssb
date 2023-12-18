@@ -48,6 +48,7 @@ class Player (pygame.sprite.Sprite):
         self.animate()
         self.collide_enemy()
         self.collide_door()
+        self.collide_laurence()
         self.rect.x += self.x_change
         self.collide_blocks("x")
         self.rect.y += self.y_change
@@ -89,6 +90,12 @@ class Player (pygame.sprite.Sprite):
         if hits:
             self.kill()
             self.game.playing = False
+
+    def collide_laurence(self):
+        hits = pygame.sprite.spritecollide(self, self.game.laurence, False)
+        if hits:
+            self.game.win = True
+            self.kill()
 
     def collide_door(self):
         hits = pygame.sprite.spritecollide(self, self.game.door, False)

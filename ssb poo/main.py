@@ -12,6 +12,8 @@ from button import *
 from attack import *
 from door import *
 from screwdriver import Screwdriver
+import time
+from laurence import Laurence
 
 
 class Game:  # main game class
@@ -21,6 +23,7 @@ class Game:  # main game class
         self.clock = pygame.time.Clock()  # set the clock
         self.font = pygame.font.SysFont('Arial', 32)  # set the font
         self.running = True  # set the running variable
+        self.win = False
         self.front = pygame.font.Font('freesansbold.ttf', 32)  # set the font
 
         self.character_spritesheet = SpriteSheet("image/character.png")  # set the spritesheet for the character
@@ -28,13 +31,14 @@ class Game:  # main game class
         self.enemy_spritesheet = SpriteSheet("image/tena.sprite.png")  # set the spritesheet for the enemy
         self.attack_spritesheet = SpriteSheet("image/attack.png")  # set the spritesheet for the attack
         self.intro_background = pygame.image.load("image/SuperSamiBosse.png")  # set the intro background
+        self.win_background = pygame.image.load("image/win.png")  # set the win background
         self.go_background = pygame.image.load("image/SuperSamiBossGO.png")  # set the game over background
         self.screwdriver_spritesheet = SpriteSheet("image/Tournevis.png")  # set the spritesheet for the screwdriver
         self.door_spritesheet = SpriteSheet("image/terrain.png")  # set the spritesheet for the door
-
+        self.laurence_spritesheet = SpriteSheet("image/enemy.png")  # set the spritesheet for laurence
     def createTilemap(self):  # create the tilemap
         a = random.randint(0, len(tilemap) - 1)  # choose a random tilemap from the list
-        for i, row in enumerate(tilemap[0]):  # for each row in the tilemap list
+        for i, row in enumerate(tilemap[a]):  # for each row in the tilemap list
             for j, collumn in enumerate(row):  # for each collumn in the row list
                 Ground(self, j, i)  # create a ground sprite at the position of the collumn and row
                 if collumn == 'E':  # if the collumn is E (enemy)
@@ -47,6 +51,8 @@ class Game:  # main game class
                     Screwdriver(self, j, i)
                 if collumn == 'D':
                     Door(self, j, i)
+                if collumn == 'L':
+                    Laurence(self, j, i)
         self.player = Player(self, 16, 5)  # create the player sprite at the position 16, 5
         # cam dans player(mouvement) ligne de for a modifier on sait jamais
 
@@ -59,6 +65,7 @@ class Game:  # main game class
         self.attacks = pygame.sprite.LayeredUpdates()  # set the attacks variable to a sprite group
         self.screwdriver_group = pygame.sprite.LayeredUpdates()
         self.door = pygame.sprite.LayeredUpdates()
+        self.laurence = pygame.sprite.LayeredUpdates()
 
         self.createTilemap()  # create the tilemap
 
@@ -96,16 +103,17 @@ class Game:  # main game class
         pygame.display.update()  # update the display
 
     def main(self):
-        time = 1 # main game loop
+        temps = time.time()
         while self.playing:  # while the game is playing
-            timer = (pygame.time.get_ticks() //1000)
-            if timer > time:
-                time = time + 1
-                print(time)
-            if time %21 == 0:
+            b = time.time() - temps
+            print("{0:.0f}".format(b))
+            if b >= 30:
+                temps = time.time()
                 self.playing = False
-                time = 1
-
+            if self.win == True:
+                self.playing = False
+                self.win = False
+                self.win_screen()
             self.events()  # check for events
             self.update()  # update the game
             self.draw()  # draw the game
@@ -151,10 +159,30 @@ class Game:  # main game class
                     self.running = False  # set the running variable to False (stop the game)
             mouse_pos = pygame.mouse.get_pos()  # get the mouse position
             mouse_pressed = pygame.mouse.get_pressed()  # get the mouse pressed
-
             if play_button.is_pressed(mouse_pos, mouse_pressed):  # if the play button is pressed
                 intro = False  # set the intro variable to False (stop the intro)
             self.screen.blit(self.intro_background, (0, 0))  # blit the intro background
+            self.screen.blit(title, title_rect)  # blit the title
+            self.screen.blit(play_button.image, play_button.rect)  # blit the play button
+            self.clock.tick(FPS)  # set the clock to 60 fps
+            pygame.display.update()  # update the display
+
+    def win_screen(self):  # intro screen
+        intro = True  # set the intro variable to True
+        title = self.front.render('win', True, BLUE_DARK)  # edit the title
+        title_rect = title.get_rect(x=395, y=100)  # edit x and y to move the title
+        play_button = Button(350, 250, 250, 100, BLUE_DARK, FOND_COLOR, 'PLAY', 60)  # edit x and y to move the button
+
+        while intro:  # while the intro is playing
+            for event in pygame.event.get():  # for each event in the event list (pygame.event.get())
+                if event.type == pygame.QUIT:  # if the event is QUIT
+                    intro = False  # set the intro variable to False (stop the intro)
+                    self.running = False  # set the running variable to False (stop the game)
+            mouse_pos = pygame.mouse.get_pos()  # get the mouse position
+            mouse_pressed = pygame.mouse.get_pressed()  # get the mouse pressed
+            if play_button.is_pressed(mouse_pos, mouse_pressed):  # if the play button is pressed
+                intro = False  # set the intro variable to False (stop the intro)
+            self.screen.blit(self.win_background, (0, 0))  # blit the intro background
             self.screen.blit(title, title_rect)  # blit the title
             self.screen.blit(play_button.image, play_button.rect)  # blit the play button
             self.clock.tick(FPS)  # set the clock to 60 fps
