@@ -69,19 +69,19 @@ class Game:  # main game class
                 Ground(self, j, i)  # create a ground sprite at the position of the collumn and row
                 if collumn == 'E':  # if the collumn is E (enemy)
                     Enemy(self, j, i)  # create an enemy sprite at the position of the collumn and row (j and i)
-                if collumn == 'B':  # if the collumn is B (block)
+                elif collumn == 'B':  # if the collumn is B (block)
                     Block(self, j, i)  # create a block sprite at the position of the collumn and row (j and i)
-                if collumn == '_':
+                elif collumn == '_':
                     Room(self, j, i)
-                if collumn == 'T':
+                elif collumn == 'T':
                     Screwdriver(self, j, i)
-                if collumn == 'S':
+                elif collumn == 'S':
                     Hacksaw(self, j, i)
-                if collumn == 'M':
+                elif collumn == 'M':
                     Hammer(self, j, i)
-                if collumn == 'D':
+                elif collumn == 'D':
                     Door(self, j, i)
-                if collumn == 'L':
+                elif collumn == 'L':
                     Laurence(self, j, i)
         self.player = Player(self, 16, 5)  # create the player sprite at the position 16, 5
         # cam dans player(mouvement) ligne de for a modifier on sait jamais

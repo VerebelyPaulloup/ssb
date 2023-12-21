@@ -48,17 +48,17 @@ class Player (pygame.sprite.Sprite):
                         self.game.character_spritesheet.get_sprite(35, 2, self.width, self.height),
                         self.game.character_spritesheet.get_sprite(68, 2, self.width, self.height)]
 
-        self.up_animate = [self.game.character_spritesheet.get_sprite(3, 34, self.width, self.height),
-                      self.game.character_spritesheet.get_sprite(35, 34, self.width, self.height),
-                      self.game.character_spritesheet.get_sprite(68, 34, self.width, self.height)]
+        self.up_animate = [self.game.character_spritesheet.get_sprite(60, 105, self.width, self.height),
+                      self.game.character_spritesheet.get_sprite(60, 105, self.width, self.height),
+                      self.game.character_spritesheet.get_sprite(68, 105, self.width, self.height)]
 
-        self.left_animate = [self.game.character_spritesheet.get_sprite(3, 98, self.width, self.height),
-                        self.game.character_spritesheet.get_sprite(35, 98, self.width, self.height),
-                        self.game.character_spritesheet.get_sprite(68, 98, self.width, self.height)]
+        self.left_animate = [self.game.character_spritesheet.get_sprite(0, 35, self.width, self.height),
+                        self.game.character_spritesheet.get_sprite(35, 35, self.width, self.height),
+                        self.game.character_spritesheet.get_sprite(70, 35, self.width, self.height)]
 
-        self.right_animate = [self.game.character_spritesheet.get_sprite(3, 66, self.width, self.height),
-                         self.game.character_spritesheet.get_sprite(35, 66, self.width, self.height),
-                         self.game.character_spritesheet.get_sprite(68, 66, self.width, self.height)]
+        self.right_animate = [self.game.character_spritesheet.get_sprite(0, 70, self.width, self.height),
+                         self.game.character_spritesheet.get_sprite(35, 70, self.width, self.height),
+                         self.game.character_spritesheet.get_sprite(70, 70, self.width, self.height)]
 
         self.inventory = Inventory()
 
