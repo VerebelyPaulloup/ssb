@@ -3,6 +3,25 @@ from config import *
 import math
 from inventory import Inventory
 class Player (pygame.sprite.Sprite):
+    game: object
+    __layer: int
+    groups: object
+    x: int
+    y: int
+    width: int
+    height: int
+    x_change: int
+    y_change: int
+    image: object
+    rect: object
+    facing: str
+    animation_loop: int
+    down_animate: list
+    up_animate: list
+    left_animate: list
+    right_animate: list
+    inventory: Inventory
+
     def __init__(self, game, x, y):
         self.game = game
         self.__layer  = PLAYER_LAYER
@@ -99,9 +118,13 @@ class Player (pygame.sprite.Sprite):
 
     def collide_door(self):
         hits = pygame.sprite.spritecollide(self, self.game.door, False)
+
         if hits:
-            self.kill()
-            self.game.playing = False
+            if self.inventory.liste[2] == True or self.inventory.liste[1] == True or self.inventory.liste[0] == True:
+                pass
+            else:
+                self.kill()
+                self.game.playing = False
 
 
     def collide_blocks(self,direction):
@@ -166,3 +189,6 @@ class Player (pygame.sprite.Sprite):
                 self.animation_loop += 0.1
                 if self.animation_loop >= 3:
                     self.animation_loop = 1
+
+    def getInventory(self):
+        print(self.inventory.liste)

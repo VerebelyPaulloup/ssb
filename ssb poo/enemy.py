@@ -5,6 +5,23 @@ import random
 
 
 class Enemy(pygame.sprite.Sprite):
+    game: object
+    _layer: int
+    groups: object
+    x: int
+    y: int
+    width: int
+    height: int
+    x_change: int
+    y_change: int
+    facing: str
+    animation_loop: int
+    movement_loop: int
+    max_travel: int
+    image: object
+    rect: object
+    left_animate: list
+    right_animate: list
 
     def __init__(self, game, x, y):
 

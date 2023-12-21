@@ -3,6 +3,8 @@ from config import *
 
 
 class SpriteSheet:
+    sheet: pygame
+
     def __init__(self, file):
         self.sheet = pygame.image.load(file).convert()
 

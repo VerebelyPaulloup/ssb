@@ -9,40 +9,22 @@ Screwdriver = False
 
 
 class Inventory:
+    liste: list
+    image: object
     def __init__(self):
-        self.liste = [Hammer, Hacksaw, Screwdriver]
-        self.image = pygame.image.load("image/Box.png")
-        self.image = pygame.transform.scale(self.image, (50, 50))
-        self.rect = self.image.get_rect(x=0, y=0)
+        self.liste = [False, False, False]
+        self.image = pygame.image.load("image/box.png")
 
     # fonction qui ajoute un objet à l'inventaire
-    def add(self, Hammer, Hacksaw, Screwdriver, player):
+    def add(self, object):
 
-        if player.rect.colliderect(Hammer.rect):
-            if Hammer.state == 1:
-                self.liste[0] = True
-                Hammer.state = 2
-                print(self.liste)
-            elif Hammer.state == 2:
-                pass
-            else:
-                pass
+        if object == 0:
+            self.liste[0] = True
 
-        elif player.rect.colliderect(Hacksaw.rect):
-            if Hacksaw.state == 1:
-                Hacksaw.liste[1] = True
-                Hacksaw.state = 2
-                print(Hacksaw.liste)
-            elif Hacksaw.state == 2:
-                pass
-            else:
-                pass
-        elif player.rect.colliderect(Screwdriver.rect):
-            if Screwdriver.state == 1:
-                self.liste[2] = True
-                Screwdriver.state = 2
-                print(self.liste)
-            elif Screwdriver.state == 2:
-                pass
-            else:
-                pass
+        elif object == 2:
+            self.liste[1] = True
+
+        elif object == 1:
+            self.liste[2] = True
+        else:
+            pass

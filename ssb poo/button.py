@@ -3,6 +3,19 @@ from config import *
 
 
 class Button:
+    font: pygame
+    content: str
+    x: int
+    y: int
+    width: int
+    height: int
+    fg: tuple
+    bg: tuple
+    image: pygame
+    rect: pygame
+    text: pygame
+    text_rect: pygame
+
     def __init__(self, x, y, width, height, fg, bg, content, fontsize):
         self.font = pygame.font.Font("Ario.ttf", fontsize)
         self.content = content

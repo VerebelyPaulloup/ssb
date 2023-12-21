@@ -5,6 +5,19 @@ from config import *
 
 
 class Screwdriver(pygame.sprite.Sprite):
+    game: object
+    _layer: int
+    groups: object
+    x: int
+    y: int
+    width: int
+    height: int
+    x_change: int
+    y_change: int
+    image: object
+    rect: object
+    state: int
+
     def __init__(self, game, x, y):
         self.game = game
         self._layer = INVENTORY_LAYER
@@ -39,9 +52,9 @@ class Screwdriver(pygame.sprite.Sprite):
             self.state = 1
             self.kill()
             print("screwdriver collected")
+            self.game.player.inventory.add(1)
+            print(self.game.player.getInventory())
             Screwdriver(self.game, 0, 0)
             return self.state
         else:
             return self.state
-
-

@@ -1,10 +1,19 @@
 import pygame
-import random
-import math
+
 from config import *
 
 
 class Laurence(pygame.sprite.Sprite):
+    game: object
+    layer: int
+    groups: tuple
+    x: int
+    y: int
+    width: int
+    height: int
+    image: pygame
+    rect: pygame
+
     def __init__(self, game, x, y):
         self.game = game
         self._layer = END_LAYER

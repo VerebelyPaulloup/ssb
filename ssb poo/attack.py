@@ -7,6 +7,21 @@ import random
 
         
 class Attack(pygame.sprite.Sprite):
+    game: object
+    __layer: int
+    groups: object
+    x: int
+    y: int
+    width: int
+    height: int
+    animation_loop: list
+    image: object
+    rect: object
+    right_animations: list
+    down_animations: list
+    left_animations: list
+    up_animations: list
+
     def __init__(self,game,x,y):
         self.game = game
         self.__layer = PLAYER_LAYER

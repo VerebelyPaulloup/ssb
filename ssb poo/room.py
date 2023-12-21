@@ -3,6 +3,16 @@ from config import *
 
 
 class Room(pygame.sprite.Sprite):
+    game: object
+    __layer: int
+    groups: object
+    x: int
+    y: int
+    width: int
+    height: int
+    image: object
+    rect: object
+
     def __init__(self, game, x, y):
         self.game = game
         self.__layer = GROUND_LAYER
@@ -17,5 +27,5 @@ class Room(pygame.sprite.Sprite):
         self.image = self.game.terrain_spritesheet.get_sprite(256, 480, self.width, self.height)
 
         self.rect = self.image.get_rect()
-        self.rect.x = self.x
-        self.rect.y = self.y
+        #self.rect.x = self.x
+        #self.rect.y = self.y

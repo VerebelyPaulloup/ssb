@@ -3,11 +3,21 @@ from config import *
 from inventory import *
 
 
-
 class Door(pygame.sprite.Sprite):
+    game: object
+    _layer: int
+    groups: object
+    x: int
+    y: int
+    width: int
+    height: int
+    x_change: int
+    y_change: int
+    inventory: object
+    image: object
+    rect: object
 
     def __init__(self, game, x, y):
-
         self.game = game
         self._layer = DOOR_LAYER
         self.groups = self.game.all_sprites, self.game.door
@@ -23,14 +33,10 @@ class Door(pygame.sprite.Sprite):
 
         self.inventory = Inventory()
 
-
         self.image = self.game.door_spritesheet.get_sprite(3, 2, self.width, self.height)
         self.image.set_colorkey(BLACK)
 
         self.rect = self.image.get_rect()
         self.rect.x = self.x
         self.rect.y = self.y
-
-    def update(self):
-        pass
 

@@ -3,6 +3,17 @@ from config import *
 
 
 class Block(pygame.sprite.Sprite):
+    game: object
+    __layer: int
+    groups: object
+    x: int
+    y: int
+    width: int
+    height: int
+    image: object
+    rect: object
+
+
     def __init__(self, game, x, y):
         self.game = game
         self.__layer = BLOCK_LAYER
