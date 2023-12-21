@@ -25,7 +25,7 @@ class Laurence(pygame.sprite.Sprite):
         self.width = 35
         self.height = 35
 
-        self.image = self.game.enemy_spritesheet.get_sprite(3, 2, self.width, self.height)
+        self.image = self.game.laurence_spritesheet.get_sprite(3, 2, self.width, self.height)
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
         self.rect.x = self.x

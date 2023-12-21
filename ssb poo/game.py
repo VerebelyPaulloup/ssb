@@ -49,7 +49,7 @@ class Game:  # main game class
         self.win = False
         self.front = pygame.font.Font('freesansbold.ttf', 32)  # set the font
 
-        self.character_spritesheet = SpriteSheet("image/character.png")  # set the spritesheet for the character
+        self.character_spritesheet = SpriteSheet("image/s2.png")  # set the spritesheet for the character
         self.terrain_spritesheet = SpriteSheet("image/terrain.png")  # set the spritesheet for the terrain
         self.enemy_spritesheet = SpriteSheet("image/tena.sprite.png")  # set the spritesheet for the enemy
         self.attack_spritesheet = SpriteSheet("image/attack.png")  # set the spritesheet for the attack
@@ -60,7 +60,7 @@ class Game:  # main game class
         self.hammer_spritesheet = SpriteSheet("image/Marteau.png")  # set the spritesheet for the hammer
         self.screwdriver_spritesheet = SpriteSheet("image/Tournevis.png")  # set the spritesheet for the screwdriver
         self.door_spritesheet = SpriteSheet("image/terrain.png")  # set the spritesheet for the door
-        self.laurence_spritesheet = SpriteSheet("image/enemy.png")  # set the spritesheet for laurence
+        self.laurence_spritesheet = SpriteSheet("image/s3.png")  # set the spritesheet for laurence
 
     def createTilemap(self):  # create the tilemap
         indiceAleatoire = random.randint(0, len(tilemap) - 1)  # choose a random tilemap from the list
